@@ -1,7 +1,9 @@
+import {Title} from '../styles/pages/Home';
+
 export default function Home() {
   return (
     <div>
-      <h1>Hello Rocket seat</h1>
+      <Title>Hello Rocket seat</Title>
       <p>Let's see how this works</p>
     </div>   
   )
