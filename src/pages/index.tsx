@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Title } from '../styles/pages/Home';
+import { GetServerSideProps } from 'next';
 
-interface Recommended {
+interface IProduct {
   id: number;
   title: string;
   price: number;
@@ -9,17 +10,11 @@ interface Recommended {
   slug: string;
 }
 
-export default function Home() {
+interface HomeProduct {
+  recommendedProducts: IProduct[];
+}
 
-  const [recommendProducts, setRecommendProducts] = useState<Recommended[]>([]);
-
-  useEffect(() => {
-    fetch('http://localhost:3333/recommended').then(response => {
-      response.json().then(data => {
-        setRecommendProducts(data);        
-      })
-    })
-  }, [])
+export default function Home({ recommendedProducts }: HomeProduct) {
 
   return (
     <div>
@@ -29,7 +24,7 @@ export default function Home() {
       <section>
         <Title>Products Recommended</Title>
         <ul>
-          {recommendProducts.map(product => {
+          {recommendedProducts.map(product => {
             return (
               <li key={product.id}>{product.title}</li>
             );
@@ -38,4 +33,16 @@ export default function Home() {
       </section>
     </div>   
   )
+}
+
+export const getServerSideProps: GetServerSideProps<HomeProduct> = async () => {
+  const response = await fetch('http://localhost:3333/recommended');
+
+  const recommendedProducts = await response.json();
+
+  return {
+    props: {
+      recommendedProducts
+    }
+  }
 }
