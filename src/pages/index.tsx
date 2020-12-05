@@ -1,5 +1,6 @@
 import { Title } from '../styles/pages/Home';
 import { GetServerSideProps } from 'next';
+import { useCallback } from 'react';
 
 interface IProduct {
   id: number;
@@ -14,6 +15,12 @@ interface HomeProduct {
 }
 
 export default function Home({ recommendedProducts }: HomeProduct) {
+
+  const handleSum = useCallback(async () => {
+    const math = (await import('../lib/match')).default;
+
+    alert(math.sum(1, 3));
+  }, [])
 
   return (
     <div>
@@ -30,6 +37,8 @@ export default function Home({ recommendedProducts }: HomeProduct) {
           })}
         </ul>
       </section>
+
+      <button onClick={handleSum}>Sum</button>
     </div>   
   )
 }
