@@ -17,6 +17,8 @@ interface HomeProduct {
 export default function Home({ recommendedProducts }: HomeProduct) {
 
   const handleSum = useCallback(async () => {
+    console.log(process.env.NEXT_PUBLIC_API_URL);
+    
     const math = (await import('../lib/match')).default;
 
     alert(math.sum(1, 3));
@@ -44,7 +46,7 @@ export default function Home({ recommendedProducts }: HomeProduct) {
 }
 
 export const getServerSideProps: GetServerSideProps<HomeProduct> = async () => {
-  const response = await fetch('http://localhost:3333/recommended');
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/recommended`);
 
   const recommendedProducts = await response.json();
 
