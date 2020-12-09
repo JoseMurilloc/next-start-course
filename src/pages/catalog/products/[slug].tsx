@@ -3,7 +3,7 @@ import { useState } from 'react';
 import dynamic from 'next/dynamic'
 
 const AddToCardModel = dynamic(
-  () => import('../../../components/AddToCardModel'), 
+  () => import('@/components/AddToCardModel'), 
   { loading: () => <p>Loading...</p>, ssr: false }
 );
 
