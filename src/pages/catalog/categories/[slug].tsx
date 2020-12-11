@@ -40,10 +40,8 @@ export const getStaticPaths: GetStaticPaths = async() => {
   const categories = await response.json();  
 
   const paths = categories.map(category => {
-    return {
-      params: { slug: category.id }
-    }
-  })
+    params: { slug: category.id }
+  });
 
   return {
     paths,

@@ -1,6 +1,7 @@
 import { Title } from '../styles/pages/Home';
 import { GetServerSideProps } from 'next';
 import { useCallback } from 'react';
+import SEO from '@/components/SEO';
 
 interface IProduct {
   id: number;
@@ -26,7 +27,8 @@ export default function Home({ recommendedProducts }: HomeProduct) {
 
   return (
     <div>
-      <Title>Hello Rocket seat</Title>
+      <SEO title="Dev" image="seo.jpg" />
+      <Title>Hello Rocketseat</Title>
       <p>Let's see how this works</p>
 
       <section>
